@@ -1,0 +1,17 @@
+<form id="upload-form" enctype="multipart/form-data">
+    <input type="file" name="audio" accept="audio/*" capture>
+    <button type="submit">Yükle</button>
+</form>
+
+<script>
+    document.getElementById('upload-form').onsubmit = function(event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        fetch('upload.php', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error('Error:', error));
+    };
+</script>
